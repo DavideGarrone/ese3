@@ -1,0 +1,72 @@
+int ledR = 10;
+int ledG = 9;
+int ledV = 8;
+
+int ledRP = 12;
+int ledVP = 13;
+
+int LED = 13;
+int SW = 2;
+int press=0;
+
+void ok ()
+{
+  press=1;
+}
+void pedoni() 
+{   
+  
+    digitalWrite(ledR, HIGH); 
+    digitalWrite(ledV, LOW);
+    digitalWrite(ledG, LOW); 
+  
+    digitalWrite(ledRP, LOW);
+    digitalWrite(ledVP, HIGH);   
+    delay(6000);
+    digitalWrite(ledVP, LOW);
+    digitalWrite(ledRP, HIGH); 
+  
+  	press=0;
+}
+
+void setup() 
+{                
+  // initialize the digital pin as an output.
+  pinMode(ledR, OUTPUT);   //setta un pin come input o output
+  pinMode(ledG, OUTPUT); 
+  pinMode(ledV, OUTPUT); 
+ //luci per pedoni
+  pinMode(ledVP, OUTPUT); 
+  pinMode(ledRP, OUTPUT); 
+  
+  pinMode(LED, OUTPUT);
+  pinMode(SW, INPUT_PULLUP);
+  attachInterrupt(INT0, ok , FALLING); //specifica la funzione da chiamare quando avviene interrupt   
+}
+
+void loop() 
+{
+  if (press==1) 
+  { pedoni();
+  }
+  digitalWrite(ledRP, HIGH);  
+  
+  digitalWrite(ledR, HIGH);   
+  delay(6000);               
+
+  digitalWrite(ledR, LOW);    
+         
+  digitalWrite(ledV, HIGH);   
+  delay(6000);               
+
+  digitalWrite(ledV, LOW);    
+       
+  
+  digitalWrite(ledG, HIGH);   
+  delay(2000);               
+
+  digitalWrite(ledG, LOW);    
+      
+ }
+
+ 
